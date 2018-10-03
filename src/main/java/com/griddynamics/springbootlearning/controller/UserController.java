@@ -2,6 +2,8 @@ package com.griddynamics.springbootlearning.controller;
 
 import com.griddynamics.springbootlearning.model.User;
 import com.griddynamics.springbootlearning.repository.UserRepository;
+import org.hibernate.annotations.Parameter;
+import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -24,5 +26,11 @@ public class UserController {
     @GetMapping("/name/{userName}")
     public List findByName(@PathVariable String name){
         return userRepository.findByName(name);
+    }
+
+    @PostMapping()
+    @ResponseStatus(HttpStatus.CREATED)
+    public User createUser(@RequestBody User user){
+        return userRepository.save(user);
     }
 }
